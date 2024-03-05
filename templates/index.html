@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text to Image</title>
+  </head>
+  <body>
+    <!-- tile of the web -->
+    <h1>Text to Image</h1>
+    <!-- form to enter text -->
+    <h2>Enter Text:</h2>
+    <form action="/generate_image" method="post">
+      <textarea
+        name="text_input"
+        rows="4"
+        cols="50"
+        placeholder="Enter Prompt..."
+      ></textarea>
+      <br /><br />
+      <h2>Enter Negative Prompt:</h2>
+      <textarea name="negative_prompt" id="negative_prompt" cols="50" rows="4" placeholder="Enter Negative Prompt..."></textarea>
+      <br /><br />
+      <input type="submit" value="Generate Image" />
+    </form>
+  </body>
+</html>
