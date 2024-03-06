@@ -11,15 +11,20 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/generate_image', methods=['POST'])
+@app.route('/', methods=['POST'])
 def generate_image():
     if request.method == 'POST':
         text_input = request.form['text_input']
         negative_input = request.form['negative_prompt']
         generated_image = generate_image_from_text(text_input, negative_input)
-        # Convert PIL image to base64 string
-        generated_image_base64 = pil_to_base64(generated_image)
-        return render_template('result.html', generated_image_base64=generated_image_base64, text_input=text_input)
+
+        # Error Handling
+        if type(generated_image) == str:
+            return render_template('index.html', generated_image_base64="", text_input=generated_image)
+        else:
+            # Convert PIL image to base64 string
+            generated_image_base64 = pil_to_base64(generated_image)
+            return render_template('index.html', generated_image_base64=generated_image_base64, text_input=text_input)
 
 
 def generate_image_from_text(text, negative_input):
@@ -36,4 +41,5 @@ def pil_to_base64(pil_image):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port='8080')
+    app.run(debug=True, host='0.0.0.0', port='8080',
+            )

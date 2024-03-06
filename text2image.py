@@ -59,21 +59,25 @@ def model(text: str, negative: str = None):
 
     # 圖片生成指令
     prompt = text
+    try:
+        response = generation_model.generate_images(
+            prompt=prompt,
+            # 產生圖片數量
+            number_of_images=1,
+            # 種子亂數，保證產生相似的圖片，如果想樣要不一樣的，設 None
+            seed=None,
+            # 負面指令，避免不想要的元素
+            negative_prompt=negative,
+        )
 
-    response = generation_model.generate_images(
-        prompt=prompt,
-        # 產生圖片數量
-        number_of_images=1,
-        # 種子亂數，保證產生相似的圖片，如果想樣要不一樣的，設 None
-        seed=None,
-        # 負面指令，避免不想要的元素
-        negative_prompt=negative,
-    )
+        # 顯示圖片
+        # display_images_in_grid(response.images)
 
-    # 顯示圖片
-    # display_images_in_grid(response.images)
+        return response.images[0]._pil_image.resize((512, 512), resample=Image.LANCZOS)
+    except Exception as e:
+        print(e)
 
-    return response.images[0]._pil_image.resize((1024, 1024), resample=Image.LANCZOS)
+        return 'This Message has been blocked. Please try again'
 
 
 if __name__ == '__main__':

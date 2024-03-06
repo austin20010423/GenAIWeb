@@ -2,13 +2,84 @@
 <html>
   <head>
     <title>Text to Image</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        text-align: center; /* Center-align the title */
+        margin-top: 50px; /* Adjust margin for spacing */
+      }
+
+      h1,
+      h2 {
+        color: #333;
+      }
+
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      textarea {
+        border: 1px solid #ccc;
+      }
+
+      input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+      .image-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .download-button {
+        text-align: center;
+      }
+
+      .download-button button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .download-button button:hover {
+        background-color: #0056b3;
+      }
+    </style>
   </head>
   <body>
     <!-- tile of the web -->
     <h1>Text to Image</h1>
     <!-- form to enter text -->
-    <h2>Enter Text:</h2>
-    <form action="/generate_image" method="post">
+    <form action="/" method="post">
+      <h2>Enter Text:</h2>
       <textarea
         name="text_input"
         rows="4"
@@ -17,9 +88,36 @@
       ></textarea>
       <br /><br />
       <h2>Enter Negative Prompt:</h2>
-      <textarea name="negative_prompt" id="negative_prompt" cols="50" rows="4" placeholder="Enter Negative Prompt..."></textarea>
+      <textarea
+        name="negative_prompt"
+        id="negative_prompt"
+        cols="50"
+        rows="4"
+        placeholder="Enter Negative Prompt..."
+      ></textarea>
       <br /><br />
       <input type="submit" value="Generate Image" />
     </form>
+
+    <div class="image-container">
+      <h2>Input Text:</h2>
+      <p>{{ text_input }}</p>
+
+      <h2>Generated Image:</h2>
+      <!-- Display the generated image -->
+      <img
+        src="data:image/png;base64,{{ generated_image_base64 }}"
+        alt="Generated Image"
+      />
+    </div>
+
+    <div class="download-button">
+      <a
+        href="data:image/png;base64,{{ generated_image_base64 }}"
+        download="generated_image.png"
+      >
+        <button>Download Image</button>
+      </a>
+    </div>
   </body>
 </html>
