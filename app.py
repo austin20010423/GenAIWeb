@@ -42,4 +42,4 @@ def pil_to_base64(pil_image):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='8080',
-            )
+            ssl_context=('server.crt', 'server.key'))
