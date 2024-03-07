@@ -15,6 +15,7 @@
             <div class="option">
               <label>主角</label>
               <select name="characters">
+                <option value="無">無</option>
                 <option value="鼠">鼠</option>
                 <option value="牛">牛</option>
                 <option value="虎">虎</option>
@@ -28,11 +29,16 @@
                 <option value="狗">狗</option>
                 <option value="猪">豬</option>
               </select>
-              <input type="text" placeholder="輸入其他主角" />
+              <input
+                name="character_input"
+                type="text"
+                placeholder="輸入更多主角敘述"
+              />
             </div>
             <div class="option">
               <label>表情</label>
-              <select name="face">
+              <select name="faces">
+                <option value="無">無</option>
                 <option value="開心">開心</option>
                 <option value="笑到哭">笑到哭</option>
                 <option value="微笑">微笑</option>
@@ -44,13 +50,18 @@
                 <option value="生氣">生氣</option>
                 <option value="睡覺">睡覺</option>
               </select>
-              <input type="text" placeholder="輸入其他表情" />
+              <input
+                name="face_input"
+                type="text"
+                placeholder="輸入更多表情敘述"
+              />
             </div>
           </div>
           <div class="option-group">
             <div class="option">
               <label>動作</label>
               <select name="action">
+                <option value="無">無</option>
                 <option value="走路">走路</option>
                 <option value="跑步">跑步</option>
                 <option value="跳舞">跳舞</option>
@@ -62,11 +73,16 @@
                 <option value="吃飯">吃飯</option>
                 <option value="寫字">寫字</option>
               </select>
-              <input type="text" placeholder="輸入其他動作" />
+              <input
+                name="action_input"
+                type="text"
+                placeholder="輸入更多動作敘述"
+              />
             </div>
             <div class="option">
               <label>背景</label>
               <select name="background">
+                <option value="無">無</option>
                 <option value="山脉">山脈</option>
                 <option value="海洋">海洋</option>
                 <option value="森林">森林</option>
@@ -78,29 +94,42 @@
                 <option value="星空">星空</option>
                 <option value="河流">河流</option>
               </select>
-              <input type="text" placeholder="輸入其他背景" />
+              <input
+                name="background_input"
+                type="text"
+                placeholder="輸入更多背景敘述"
+              />
             </div>
           </div>
           <div class="input text">
-            <input type="text" placeholder="讓圖片說點什麼" />
+            <input
+              name="word_on_picture"
+              type="text"
+              placeholder="讓圖片說點什麼"
+            />
           </div>
           <input type="submit" value="生成圖片" />
         </form>
       </div>
       <div class="right-panel">
-        <div class="preview-text"><p>{{ text_input }}</p></div>
-        <div class="preview-image">
+        <div class="image-container">
+          <h2>Input Text:</h2>
+          <p>{{ text_input }}</p>
+
+          <h2>Generated Image:</h2>
+          <!-- Display the generated image -->
           <img
             src="data:image/png;base64,{{ generated_image_base64 }}"
             alt="Generated Image"
           />
         </div>
+
         <div class="download-button">
           <a
             href="data:image/png;base64,{{ generated_image_base64 }}"
             download="generated_image.png"
           >
-            <button>下載貼圖</button>
+            <button>Download Image</button>
           </a>
         </div>
       </div>

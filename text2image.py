@@ -71,7 +71,7 @@ def model(text: str, negative: str = None):
         )
 
         # 顯示圖片
-        display_images_in_grid(response.images)
+        # display_images_in_grid(response.images)
 
         return response.images[0]._pil_image.resize((512, 512), resample=Image.LANCZOS)
     except Exception as e:

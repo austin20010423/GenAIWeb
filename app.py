@@ -17,16 +17,20 @@ def index():
 @app.route('/', methods=['POST'])
 def generate_image():
     if request.method == 'POST':
-        characters = request.form['characters']
-        print(characters)
+        option = get_selection_input()
+        option_input = get_text_input()
+        word_on_picture = request.form['word_on_picture']
 
+        # Prompt
+
+        prompt = option + option_input
+        prompt = ', '.join(prompt) + word_on_picture
         # Translate to Chinese
-        '''text_input = translate(text_input)
-        negative_input = translate(negative_input)'''
+        text_input = translate(prompt)
 
         # Generate image
-        # generated_image = generate_image_from_text(text_input, negative_input)
-'''
+        generated_image = generate_image_from_text(text_input)
+
         # Error Handling
         if type(generated_image) == str:
             return render_template('index.html', generated_image_base64="", text_input=generated_image)
@@ -34,9 +38,45 @@ def generate_image():
             # Convert PIL image to base64 string
             generated_image_base64 = pil_to_base64(generated_image)
             return render_template('index.html', generated_image_base64=generated_image_base64, text_input=text_input)
-'''
 
 
+def get_selection_input():
+    # get select option
+    characters = request.form['characters']
+    faces = request.form['faces']
+    background = request.form['background']
+    action = request.form['action']
+    options = [characters, faces, background, action]
+
+    try:
+        element_to_remove = "無"
+        options = [x for x in options if x != element_to_remove]
+
+    except:
+        pass
+
+    return options
+
+
+def get_text_input():
+    character_input = request.form['character_input']
+    face_input = request.form['face_input']
+    action_input = request.form['action_input']
+    background_input = request.form['background_input']
+    option_input = [character_input, face_input,
+                    action_input, background_input]
+
+    try:
+        element_to_remove = ""
+        option_input = [x for x in option_input if x != element_to_remove]
+
+    except:
+        pass
+
+    return option_input
+
+
+# Translate to English
 def translate(text: str):
     translator = Translator()
     translated = translator.translate(text, dest='en')
@@ -44,7 +84,7 @@ def translate(text: str):
     return translated.text
 
 
-def generate_image_from_text(text, negative_input):
+def generate_image_from_text(text, negative_input=None):
     # Assuming text2image.model(text) returns a PIL image object
     image = text2image.model(text, negative_input)
     return image
