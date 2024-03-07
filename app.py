@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from io import BytesIO
 import base64
-import text2image  # Assuming text2image is your model for converting text to image
+import text2image  
 import os
 from googletrans import Translator
 
