@@ -2,7 +2,10 @@ from flask import Flask, render_template, request
 from io import BytesIO
 import base64
 import text2image  # Assuming text2image is your model for converting text to image
+import os
+from googletrans import Translator
 
+ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 
 
@@ -14,10 +17,16 @@ def index():
 @app.route('/', methods=['POST'])
 def generate_image():
     if request.method == 'POST':
-        text_input = request.form['text_input']
-        negative_input = request.form['negative_prompt']
-        generated_image = generate_image_from_text(text_input, negative_input)
+        characters = request.form['characters']
+        print(characters)
 
+        # Translate to Chinese
+        '''text_input = translate(text_input)
+        negative_input = translate(negative_input)'''
+
+        # Generate image
+        # generated_image = generate_image_from_text(text_input, negative_input)
+'''
         # Error Handling
         if type(generated_image) == str:
             return render_template('index.html', generated_image_base64="", text_input=generated_image)
@@ -25,6 +34,14 @@ def generate_image():
             # Convert PIL image to base64 string
             generated_image_base64 = pil_to_base64(generated_image)
             return render_template('index.html', generated_image_base64=generated_image_base64, text_input=text_input)
+'''
+
+
+def translate(text: str):
+    translator = Translator()
+    translated = translator.translate(text, dest='en')
+    print("Prompt: ", translated.text)
+    return translated.text
 
 
 def generate_image_from_text(text, negative_input):
@@ -41,5 +58,6 @@ def pil_to_base64(pil_image):
 
 
 if __name__ == '__main__':
+    context = ('server.crt', 'server.key')
     app.run(debug=True, host='0.0.0.0', port='8080',
-            ssl_context=('server.crt', 'server.key'))
+            ssl_context=context)

@@ -1,123 +1,109 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Text to Image</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-      h1 {
-        text-align: center; /* Center-align the title */
-        margin-top: 50px; /* Adjust margin for spacing */
-      }
-
-      h1,
-      h2 {
-        color: #333;
-      }
-
-      form {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-      }
-
-      textarea {
-        border: 1px solid #ccc;
-      }
-
-      input[type="submit"] {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      input[type="submit"]:hover {
-        background-color: #0056b3;
-      }
-
-      .image-container {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-      }
-
-      .download-button {
-        text-align: center;
-      }
-
-      .download-button button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      .download-button button:hover {
-        background-color: #0056b3;
-      }
-    </style>
+    <title>TextToSticker</title>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css" />
   </head>
   <body>
-    <!-- tile of the web -->
-    <h1>Text to Image</h1>
-    <!-- form to enter text -->
-    <form action="/" method="post">
-      <h2>Enter Text:</h2>
-      <textarea
-        name="text_input"
-        rows="4"
-        cols="50"
-        placeholder="Enter Prompt..."
-      ></textarea>
-      <br /><br />
-      <h2>Enter Negative Prompt:</h2>
-      <textarea
-        name="negative_prompt"
-        id="negative_prompt"
-        cols="50"
-        rows="4"
-        placeholder="Enter Negative Prompt..."
-      ></textarea>
-      <br /><br />
-      <input type="submit" value="Generate Image" />
-    </form>
-
-    <div class="image-container">
-      <h2>Input Text:</h2>
-      <p>{{ text_input }}</p>
-
-      <h2>Generated Image:</h2>
-      <!-- Display the generated image -->
-      <img
-        src="data:image/png;base64,{{ generated_image_base64 }}"
-        alt="Generated Image"
-      />
-    </div>
-
-    <div class="download-button">
-      <a
-        href="data:image/png;base64,{{ generated_image_base64 }}"
-        download="generated_image.png"
-      >
-        <button>Download Image</button>
-      </a>
+    <header>
+      <h1>TextToSticker - 文字一鍵變身貼圖</h1>
+    </header>
+    <div class="container">
+      <div class="left-panel">
+        <form action="/" method="post">
+          <div class="option-group">
+            <div class="option">
+              <label>主角</label>
+              <select name="characters">
+                <option value="鼠">鼠</option>
+                <option value="牛">牛</option>
+                <option value="虎">虎</option>
+                <option value="兔">兔</option>
+                <option value="龙">龍</option>
+                <option value="蛇">蛇</option>
+                <option value="马">馬</option>
+                <option value="羊">羊</option>
+                <option value="猴">猴</option>
+                <option value="鸡">雞</option>
+                <option value="狗">狗</option>
+                <option value="猪">豬</option>
+              </select>
+              <input type="text" placeholder="輸入其他主角" />
+            </div>
+            <div class="option">
+              <label>表情</label>
+              <select name="face">
+                <option value="開心">開心</option>
+                <option value="笑到哭">笑到哭</option>
+                <option value="微笑">微笑</option>
+                <option value="戀愛中">戀愛中</option>
+                <option value="酷炫">酷炫</option>
+                <option value="天使">天使</option>
+                <option value="調皮">調皮</option>
+                <option value="不爽">不爽</option>
+                <option value="生氣">生氣</option>
+                <option value="睡覺">睡覺</option>
+              </select>
+              <input type="text" placeholder="輸入其他表情" />
+            </div>
+          </div>
+          <div class="option-group">
+            <div class="option">
+              <label>動作</label>
+              <select name="action">
+                <option value="走路">走路</option>
+                <option value="跑步">跑步</option>
+                <option value="跳舞">跳舞</option>
+                <option value="游泳">游泳</option>
+                <option value="打籃球">打籃球</option>
+                <option value="唱歌">唱歌</option>
+                <option value="跳躍">跳躍</option>
+                <option value="睡覺">睡覺</option>
+                <option value="吃飯">吃飯</option>
+                <option value="寫字">寫字</option>
+              </select>
+              <input type="text" placeholder="輸入其他動作" />
+            </div>
+            <div class="option">
+              <label>背景</label>
+              <select name="background">
+                <option value="山脉">山脈</option>
+                <option value="海洋">海洋</option>
+                <option value="森林">森林</option>
+                <option value="沙漠">沙漠</option>
+                <option value="湖泊">湖泊</option>
+                <option value="城市">城市</option>
+                <option value="田野">田野</option>
+                <option value="雪山">雪山</option>
+                <option value="星空">星空</option>
+                <option value="河流">河流</option>
+              </select>
+              <input type="text" placeholder="輸入其他背景" />
+            </div>
+          </div>
+          <div class="input text">
+            <input type="text" placeholder="讓圖片說點什麼" />
+          </div>
+          <input type="submit" value="生成圖片" />
+        </form>
+      </div>
+      <div class="right-panel">
+        <div class="preview-text"><p>{{ text_input }}</p></div>
+        <div class="preview-image">
+          <img
+            src="data:image/png;base64,{{ generated_image_base64 }}"
+            alt="Generated Image"
+          />
+        </div>
+        <div class="download-button">
+          <a
+            href="data:image/png;base64,{{ generated_image_base64 }}"
+            download="generated_image.png"
+          >
+            <button>下載貼圖</button>
+          </a>
+        </div>
+      </div>
     </div>
   </body>
 </html>
