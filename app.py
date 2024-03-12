@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from io import BytesIO
 import base64
-import text2image  
+import text2image
 import os
 from googletrans import Translator
 
@@ -99,5 +99,4 @@ def pil_to_base64(pil_image):
 
 if __name__ == '__main__':
     context = ('server.crt', 'server.key')
-    app.run(debug=True, host='0.0.0.0', port='8080',
-            ssl_context=context)
+    app.run(debug=True)
