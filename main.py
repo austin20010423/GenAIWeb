@@ -25,7 +25,7 @@ def generate_image():
         # Prompt
 
         prompt = option + option_input
-        prompt = ', '.join(prompt) + word_on_picture
+        prompt = ', '.join(prompt) + ", 寫在圖片上的字： " + word_on_picture
         # Translate to Chinese
         text_input = translate(prompt)
 
@@ -47,7 +47,9 @@ def get_selection_input():
     faces = request.form['faces']
     background = request.form['background']
     action = request.form['action']
-    options = [characters, faces, background, action]
+    style = request.form['style']
+    clothes = request.form['clothes']
+    options = [characters, faces, background, action, style, clothes]
 
     try:
         element_to_remove = "無"
@@ -64,8 +66,10 @@ def get_text_input():
     face_input = request.form['face_input']
     action_input = request.form['action_input']
     background_input = request.form['background_input']
+    style_input = request.form['style_input']
+    clothes_input = request.form['clothes_input']
     option_input = [character_input, face_input,
-                    action_input, background_input]
+                    action_input, background_input, style_input, clothes_input]
 
     try:
         element_to_remove = ""
