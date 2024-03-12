@@ -5,6 +5,7 @@ import text2image
 import os
 from googletrans import Translator
 
+
 ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 
@@ -98,5 +99,4 @@ def pil_to_base64(pil_image):
 
 
 if __name__ == '__main__':
-    context = ('server.crt', 'server.key')
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8081, debug=True)

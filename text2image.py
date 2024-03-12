@@ -5,7 +5,6 @@
 import vertexai
 from vertexai.preview.vision_models import ImageGenerationModel
 from PIL import Image
-import matplotlib.pyplot as plt
 import math
 import io
 
@@ -13,13 +12,9 @@ import io
 PROJECT_ID = "sunlit-inn-386509"  # @param {type:"string"}
 LOCATION = "us-central1"  # @param {type:"string"}
 
-
+"""
 def display_images_in_grid(images):
-    """Displays the provided images in a grid format. 4 images per row.
-
-    Args:
-        images: A list of PIL Image objects representing the images to display.
-    """
+    
 
     # Determine the number of rows and columns for the grid layout.
     nrows = math.ceil(len(images) / 4)  # Display at most 4 images per row
@@ -49,6 +44,7 @@ def display_images_in_grid(images):
 
     # Display the figure with the arranged images.
     plt.show()
+"""
 
 
 def model(text: str, negative: str = None):
@@ -80,6 +76,9 @@ def model(text: str, negative: str = None):
         return 'This Message has been blocked. Please try again'
 
 
+"""
+
 if __name__ == '__main__':
 
     model("a cute cartoon dog on a grass, front")
+"""
