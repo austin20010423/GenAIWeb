@@ -141,15 +141,17 @@
               placeholder="讓圖片說點什麼"
             />
           </div>
-          <input type="submit" value="生成圖片" />
+          <div class="submit">
+            <input type="submit" value="生成圖片" />
+          </div>
         </form>
       </div>
       <div class="right-panel">
         <div class="image-container">
-          <h2>Input Text:</h2>
+          <h2>Input Text</h2>
           <p>{{ text_input }}</p>
 
-          <h2>Generated Image:</h2>
+          <h2>Generated Image</h2>
           <!-- Display the generated image -->
           <img
             src="data:image/png;base64,{{ generated_image_base64 }}"

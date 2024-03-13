@@ -21,11 +21,14 @@ def generate_image():
         option = get_selection_input()
         option_input = get_text_input()
         word_on_picture = request.form['word_on_picture']
+        if word_on_picture != "":
+            word_on_picture = ", 寫在圖片右上角的字： " + word_on_picture
+        else:
+            word_on_picture = ""
 
         # Prompt
-
         prompt = option + option_input
-        prompt = ', '.join(prompt) + ", 寫在圖片上的字： " + word_on_picture
+        prompt = ', '.join(prompt) + word_on_picture
         # Translate to Chinese
         text_input = translate(prompt)
 
