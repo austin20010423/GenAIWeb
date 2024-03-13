@@ -73,7 +73,8 @@ def model(text: str, negative: str = None):
     except Exception as e:
         print(e)
 
-        return 'This Message has been blocked because it violate our Community Guidelines. Please try again'
+        return """This Message has been blocked because it violate our Community Guidelines or the prompt is empty. 
+                Please try again"""
 
 
 """
