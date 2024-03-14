@@ -74,14 +74,57 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.switch {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 50px; 
+  }
+
+  #switchButton {
+    border-radius: 8px; 
+    color: white; 
+    padding: 8px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px;
+    margin: 4px 2px; 
+    border: none;
+    cursor: pointer;
+    transition-duration: 0.4s; 
+  }
+
+#switchButton:hover {
+    background-color: rgb(62, 63, 64);
+  }
+
+
 button {
     margin-top: 10px;
     padding: 10px 20px;
     background-color: #333333;
     color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px; 
+    margin: 4px 2px;
     border: none;
-    border-radius: 3px;
+    border-radius: 8px;
     cursor: pointer;
+}
+Button:hover {
+    background-color: rgb(62, 63, 64);
+  }
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        width: 100%;
+    }
 }
 
   /* Style the container to center the button */
@@ -115,10 +158,12 @@ input[type="submit"] {
 
   label {
     font-family: 'Roboto', sans-serif; /* Specify the custom font */
-    font-size: 1.5em; /* Adjust the font size as needed */
+    font-size: 25px; /* Adjust the font size as needed */
 }
 
 .download-button {
+    border-radius: 8px;
     margin-top: 20px; /* Add margin at the top */
     margin-bottom: 20px; /* Add margin at the bottom */
 }
+

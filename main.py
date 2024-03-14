@@ -22,7 +22,7 @@ def generate_image():
         option_input = get_text_input()
         word_on_picture = request.form['word_on_picture']
         if word_on_picture != "":
-            word_on_picture = ", 寫在圖片右上角的字： " + word_on_picture
+            word_on_picture = ", 寫一些對話的文字在圖片右上角： " + word_on_picture
         else:
             word_on_picture = ""
 

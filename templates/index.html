@@ -13,6 +13,12 @@
     <header>
       <h1>TextToSticker - 文字一鍵變身貼圖</h1>
     </header>
+
+    <div class="switch">
+      <span>設計選擇</span>
+      <button id="switchButton" onclick="changeText()">標準</button>
+    </div>
+
     <div class="container">
       <div class="left-panel">
         <form action="/" method="post">
@@ -35,6 +41,7 @@
                 <option value="猪">豬</option>
               </select>
               <input
+                id="extend"
                 name="character_input"
                 type="text"
                 placeholder="輸入更多主角敘述"
@@ -56,6 +63,7 @@
                 <option value="睡覺">睡覺</option>
               </select>
               <input
+                id="extend"
                 name="face_input"
                 type="text"
                 placeholder="輸入更多表情敘述"
@@ -79,6 +87,7 @@
                 <option value="寫字">寫字</option>
               </select>
               <input
+                id="extend"
                 name="action_input"
                 type="text"
                 placeholder="輸入更多動作敘述"
@@ -100,6 +109,7 @@
                 <option value="河流">河流</option>
               </select>
               <input
+                id="extend"
                 name="background_input"
                 type="text"
                 placeholder="輸入更多背景敘述"
@@ -117,6 +127,7 @@
                 <option value="公仔">公仔</option>
               </select>
               <input
+                id="extend"
                 name="style_input"
                 type="text"
                 placeholder="輸入更多風格敘述"
@@ -133,6 +144,7 @@
                 <option value="棒球服">棒球服</option>
               </select>
               <input
+                id="extend"
                 name="clothes_input"
                 type="text"
                 placeholder="輸入更多服裝敘述"
@@ -141,6 +153,7 @@
           </div>
           <div class="input text">
             <input
+              id="extend"
               name="word_on_picture"
               type="text"
               placeholder="讓圖片說點什麼"
@@ -175,5 +188,32 @@
       </div>
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      var button = document.getElementById("switchButton");
+      var inputs = document.querySelectorAll("input[id='extend']");
+      var buttonState = localStorage.getItem("buttonState") === "true";
+
+      updateButton();
+
+      button.onclick = function () {
+        buttonState = !buttonState;
+        localStorage.setItem("buttonState", buttonState);
+        updateButton();
+      };
+
+      function updateButton() {
+        if (buttonState) {
+          button.innerHTML = "簡約";
+          for (var i = 0; i < inputs.length; i++) {
+            inputs[i].style.display = "none";
+          }
+        } else {
+          button.innerHTML = "標準";
+          for (var i = 0; i < inputs.length; i++) {
+            inputs[i].style.display = "block";
+          }
+        }
+      }
+    </script>
   </body>
 </html>
