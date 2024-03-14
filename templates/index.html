@@ -151,14 +151,28 @@
               />
             </div>
           </div>
-          <div class="input text">
-            <input
-              id="extend"
-              name="word_on_picture"
-              type="text"
-              placeholder="讓圖片說點什麼"
-            />
+
+          <div
+            class="option-group"
+            style="display: flex; justify-content: center"
+          >
+            <div class="option">
+              <label>讓貼圖說點什麼</label>
+              <select name="say_something">
+                <option value="無">無</option>
+                <option value="早安">早安</option>
+                <option value="你好">你好</option>
+                <option value="謝謝你">謝謝你</option>
+              </select>
+              <input
+                id="extend"
+                name="word_on_picture"
+                type="text"
+                placeholder="讓圖片說點什麼"
+              />
+            </div>
           </div>
+
           <div class="submit">
             <input type="submit" value="生成圖片" />
           </div>

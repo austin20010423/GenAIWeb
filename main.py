@@ -52,7 +52,9 @@ def get_selection_input():
     action = request.form['action']
     style = request.form['style']
     clothes = request.form['clothes']
-    options = [characters, faces, background, action, style, clothes]
+    say_something = "寫一些對話的文字在圖片右上角： " + request.form['say_something']
+    options = [characters, faces, background,
+               action, style, clothes, say_something]
 
     try:
         element_to_remove = "無"
