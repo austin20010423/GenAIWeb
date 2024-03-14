@@ -27,18 +27,19 @@
               <label>主角</label>
               <select name="characters">
                 <option value="無">無</option>
-                <option value="鼠">鼠</option>
-                <option value="牛">牛</option>
-                <option value="虎">虎</option>
-                <option value="兔">兔</option>
-                <option value="龙">龍</option>
-                <option value="蛇">蛇</option>
-                <option value="马">馬</option>
+                <option value="小老鼠">小老鼠</option>
+                <option value="乳牛">乳牛</option>
+                <option value="老虎">老虎</option>
+                <option value="兔子">兔子</option>
+                <option value="龍">龍</option>
+                <option value="馬">馬</option>
                 <option value="羊">羊</option>
-                <option value="猴">猴</option>
-                <option value="鸡">雞</option>
-                <option value="狗">狗</option>
-                <option value="猪">豬</option>
+                <option value="猴子">猴子</option>
+                <option value="雞">雞</option>
+                <option value="狗狗">狗狗</option>
+                <option value="小鳥">小鳥</option>
+                <option value="海豚">海豚</option>
+                <option value="松鼠">松鼠</option>
               </select>
               <input
                 id="extend"
@@ -125,6 +126,7 @@
                 <option value="寫實">寫實</option>
                 <option value="油畫">油畫</option>
                 <option value="公仔">公仔</option>
+                <option value="抽像">抽象</option>
               </select>
               <input
                 id="extend"
@@ -152,12 +154,9 @@
             </div>
           </div>
 
-          <div
-            class="option-group"
-            style="display: flex; justify-content: center"
-          >
+          <div class="option-group">
             <div class="option">
-              <label>讓貼圖說點什麼</label>
+              <label>讓圖片說點什麼吧</label>
               <select name="say_something">
                 <option value="無">無</option>
                 <option value="早安">早安</option>
@@ -168,7 +167,21 @@
                 id="extend"
                 name="word_on_picture"
                 type="text"
-                placeholder="讓圖片說點什麼"
+                placeholder="讓圖片說點什麼吧"
+              />
+            </div>
+
+            <div class="option">
+              <label>樣貌</label>
+              <select name="look">
+                <option value="無">無</option>
+                <option value="可愛">可愛</option>
+              </select>
+              <input
+                id="extend"
+                name="look_input"
+                type="text"
+                placeholder="輸入更多樣式的敘述"
               />
             </div>
           </div>

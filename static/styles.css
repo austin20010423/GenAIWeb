@@ -155,9 +155,9 @@ input[type="submit"] {
   input[type="submit"]:hover {
     background-color: #333; /* Darker gray */
   }
-
+  @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
   label {
-    font-family: 'Roboto', sans-serif; /* Specify the custom font */
+    font-family: 'cwTeXYen', sans-serif; /* Specify the custom font */
     font-size: 25px; /* Adjust the font size as needed */
 }
 

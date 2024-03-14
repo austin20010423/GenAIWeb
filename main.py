@@ -20,15 +20,10 @@ def generate_image():
     if request.method == 'POST':
         option = get_selection_input()
         option_input = get_text_input()
-        word_on_picture = request.form['word_on_picture']
-        if word_on_picture != "":
-            word_on_picture = ", 寫一些對話的文字在圖片右上角： " + word_on_picture
-        else:
-            word_on_picture = ""
 
         # Prompt
         prompt = option + option_input
-        prompt = ', '.join(prompt) + word_on_picture
+        prompt = ', '.join(prompt)
         # Translate to Chinese
         text_input = translate(prompt)
 
@@ -52,9 +47,12 @@ def get_selection_input():
     action = request.form['action']
     style = request.form['style']
     clothes = request.form['clothes']
-    say_something = "寫一些對話的文字在圖片右上角： " + request.form['say_something']
+    look = request.form['look']
+    say_something = "文字： " + \
+        request.form['say_something'] if request.form['say_something'] != "無" else "無"
+
     options = [characters, faces, background,
-               action, style, clothes, say_something]
+               action, style, clothes, look, say_something]
 
     try:
         element_to_remove = "無"
@@ -73,8 +71,11 @@ def get_text_input():
     background_input = request.form['background_input']
     style_input = request.form['style_input']
     clothes_input = request.form['clothes_input']
+    look = request.form['look_input']
+    say_something = "文字： " + \
+        request.form['word_on_picture'] if request.form['word_on_picture'] != "" else ""
     option_input = [character_input, face_input,
-                    action_input, background_input, style_input, clothes_input]
+                    action_input, background_input, style_input, clothes_input, look, say_something]
 
     try:
         element_to_remove = ""
