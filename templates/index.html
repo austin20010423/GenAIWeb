@@ -171,10 +171,12 @@
 
           <h2>Generated Image</h2>
           <!-- Display the generated image -->
-          <img
-            src="data:image/png;base64,{{ generated_image_base64 }}"
-            alt="Generated Image"
-          />
+          <div style="display: flex; justify-content: center">
+            <img
+              src="data:image/png;base64,{{ generated_image_base64 }}"
+              alt="Generated Image"
+            />
+          </div>
         </div>
 
         <div class="download-button">
