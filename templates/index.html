@@ -28,9 +28,10 @@
               <select name="characters">
                 <option value="無">無</option>
                 <option value="小老鼠">小老鼠</option>
-                <option value="乳牛">乳牛</option>
                 <option value="老虎">老虎</option>
                 <option value="兔子">兔子</option>
+                <option value="乳牛">乳牛</option>
+                <option value="蛇">蛇</option>
                 <option value="龍">龍</option>
                 <option value="馬">馬</option>
                 <option value="羊">羊</option>
@@ -40,6 +41,10 @@
                 <option value="小鳥">小鳥</option>
                 <option value="海豚">海豚</option>
                 <option value="松鼠">松鼠</option>
+                <option value="貓加狗">貓加狗</option>
+                <option value="雞加狗">雞加狗</option>
+                <option value="狗加松鼠">狗加松鼠</option>
+                <option value="老鼠加牛">老鼠加牛</option>
               </select>
               <input
                 id="extend"
@@ -107,7 +112,14 @@
                 <option value="田野">田野</option>
                 <option value="雪山">雪山</option>
                 <option value="星空">星空</option>
-                <option value="河流">河流</option>
+                <option value="草原">草原</option>
+                <option value="校園">校園</option>
+                <option value="醫院">醫院</option>
+                <option value="棒球場">棒球場</option>
+                <option value="籃球場">籃球場</option>
+                <option value="公園">公園</option>
+                <option value="遊樂場">遊樂場</option>
+                <option value="綠洲">綠洲</option>
               </select>
               <input
                 id="extend"
@@ -162,6 +174,16 @@
                 <option value="早安">早安</option>
                 <option value="你好">你好</option>
                 <option value="謝謝你">謝謝你</option>
+                <option value="晚安">晚安</option>
+                <option value="對不起">對不起</option>
+                <option value="歡迎">歡迎</option>
+                <option value="讚">讚</option>
+                <option value="恭喜">恭喜</option>
+                <option value="加油">加油</option>
+                <option value="哈哈哈">哈哈哈</option>
+                <option value="+1">+1</option>
+                <option value="端午節快樂">端午節快樂</option>
+                <option value="Love">Love</option>
               </select>
               <input
                 id="extend"
@@ -197,22 +219,51 @@
           <p>{{ text_input }}</p>
 
           <h2>Generated Image</h2>
-          <!-- Display the generated image -->
-          <div style="display: flex; justify-content: center">
-            <img
-              src="data:image/png;base64,{{ generated_image_base64 }}"
-              alt="Generated Image"
-            />
+          <!-- Display the generated images and download buttons -->
+          <div>
+            <!-- First group of images and download buttons -->
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+              <!-- First Image 1 -->
+              <div style="text-align: center;">
+                <img src="data:image/png;base64,{{ base64_encoded_image_1 }}" alt="Image 1" style="margin-bottom: 5px; width: 200px;">
+                <a href="data:image/png;base64,{{ base64_encoded_image_1 }}" download="image_1.png">
+                  <button>Download Image 1</button>
+                </a>
+              </div>
+              
+              <!-- First Image 2 -->
+              <div style="text-align: center;">
+                <img src="data:image/png;base64,{{ base64_encoded_image_2 }}" alt="Image 2" style="margin-bottom: 5px; width: 200px;">
+                <a href="data:image/png;base64,{{ base64_encoded_image_2 }}" download="image_2.png">
+                  <button>Download Image 2</button>
+                </a>
+              </div>
+            </div>
+          
+            <!-- Second group of images and download buttons -->
+            <div style="display: flex; justify-content: space-between;">
+              <!-- Second Image 3 -->
+              <div style="text-align: center;">
+                <img src="data:image/png;base64,{{ base64_encoded_image_3 }}" alt="Image 3" style="margin-bottom: 5px; width: 200px;">
+                <a href="data:image/png;base64,{{ base64_encoded_image_3 }}" download="image_3.png">
+                  <button>Download Image 3</button>
+                </a>
+              </div>
+          
+              <!-- Second Image 4 -->
+              <div style="text-align: center;">
+                <img src="data:image/png;base64,{{ base64_encoded_image_4 }}" alt="Image 4" style="margin-bottom: 5px; width: 200px;">
+                <a href="data:image/png;base64,{{ base64_encoded_image_4 }}" download="image_4.png">
+                  <button>Download Image 4</button>
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
+          
+          
+          
 
-        <div class="download-button">
-          <a
-            href="data:image/png;base64,{{ generated_image_base64 }}"
-            download="generated_image.png"
-          >
-            <button>Download Image</button>
-          </a>
+          </div>
         </div>
       </div>
     </div>
@@ -242,6 +293,42 @@
             inputs[i].style.display = "block";
           }
         }
+      }
+
+      function downloadImages() {
+        // Create a new ZIP archive
+        var zip = new JSZip();
+
+        // Add each image to the ZIP archive
+        zip.file("image1.png", "{{ base64_encoded_image_1 }}", {
+          base64: true,
+        });
+        zip.file("image2.png", "{{ base64_encoded_image_2 }}", {
+          base64: true,
+        });
+        zip.file("image3.png", "{{ base64_encoded_image_3 }}", {
+          base64: true,
+        });
+        zip.file("image4.png", "{{ base64_encoded_image_4 }}", {
+          base64: true,
+        });
+
+        // Generate the ZIP file content
+        zip.generateAsync({ type: "blob" }).then(function (content) {
+          // Create a download link for the ZIP file
+          var downloadLink = document.createElement("a");
+          downloadLink.download = "images.zip";
+          downloadLink.href = URL.createObjectURL(content);
+
+          // Append the download link to the document body
+          document.body.appendChild(downloadLink);
+
+          // Trigger the download
+          downloadLink.click();
+
+          // Remove the download link from the document body
+          document.body.removeChild(downloadLink);
+        });
       }
     </script>
   </body>

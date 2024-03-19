@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from io import BytesIO
 import base64
 import text2image
+from PIL import Image
 import os
 from googletrans import Translator
 
@@ -34,9 +35,45 @@ def generate_image():
         if type(generated_image) == str:
             return render_template('index.html', generated_image_base64="", text_input=generated_image)
         else:
-            # Convert PIL image to base64 string
-            generated_image_base64 = pil_to_base64(generated_image)
-            return render_template('index.html', generated_image_base64=generated_image_base64, text_input=text_input)
+            generated_image_ = []
+            for i in range(0, len(generated_image)):
+                # Convert PIL image to base64 string
+                generated_image_.append(pil_to_base64(generated_image[i]._pil_image.resize(
+                    (1024, 1024), resample=Image.LANCZOS)))
+
+            if len(generated_image_) > 3:
+                return render_template('index.html',
+                                       base64_encoded_image_1=generated_image_[
+                                           0],
+                                       base64_encoded_image_2=generated_image_[
+                                           1],
+                                       base64_encoded_image_3=generated_image_[
+                                           2],
+                                       base64_encoded_image_4=generated_image_[
+                                           3],
+                                       text_input=text_input)
+            elif len(generated_image) == 3:
+                return render_template('index.html',
+                                       base64_encoded_image_1=generated_image_[
+                                           0],
+                                       base64_encoded_image_2=generated_image_[
+                                           1],
+                                       base64_encoded_image_3=generated_image_[
+                                           2],
+                                       text_input=text_input)
+
+            elif len(generated_image) == 2:
+                return render_template('index.html',
+                                       base64_encoded_image_1=generated_image_[
+                                           0],
+                                       base64_encoded_image_2=generated_image_[
+                                           1],
+                                       text_input=text_input)
+            else:
+                return render_template('index.html',
+                                       base64_encoded_image_1=generated_image_[
+                                           0],
+                                       text_input=text_input)
 
 
 def get_selection_input():
@@ -48,7 +85,7 @@ def get_selection_input():
     style = request.form['style']
     clothes = request.form['clothes']
     look = request.form['look']
-    say_something = "文字： " + \
+    say_something = "圖片上的文字： " + \
         request.form['say_something'] if request.form['say_something'] != "無" else "無"
 
     options = [characters, faces, background,
@@ -72,7 +109,7 @@ def get_text_input():
     style_input = request.form['style_input']
     clothes_input = request.form['clothes_input']
     look = request.form['look_input']
-    say_something = "文字： " + \
+    say_something = "圖片上的文字： " + \
         request.form['word_on_picture'] if request.form['word_on_picture'] != "" else ""
     option_input = [character_input, face_input,
                     action_input, background_input, style_input, clothes_input, look, say_something]

@@ -59,7 +59,7 @@ def model(text: str, negative: str = None):
         response = generation_model.generate_images(
             prompt=prompt,
             # 產生圖片數量
-            number_of_images=1,
+            number_of_images=4,
             # 種子亂數，保證產生相似的圖片，如果想樣要不一樣的，設 None
             seed=None,
             # 負面指令，避免不想要的元素
@@ -69,7 +69,8 @@ def model(text: str, negative: str = None):
         # 顯示圖片
         # display_images_in_grid(response.images)
 
-        return response.images[0]._pil_image.resize((512, 512), resample=Image.LANCZOS)
+        # ._pil_image.resize((512, 512), resample=Image.LANCZOS)
+        return response.images
     except Exception as e:
         print(e)
 
@@ -78,8 +79,8 @@ def model(text: str, negative: str = None):
 
 
 """
-
 if __name__ == '__main__':
 
-    model("a cute cartoon dog on a grass, front")
+    result = model("a cute cartoon dog on a grass, front")
+    print(len(result))
 """
