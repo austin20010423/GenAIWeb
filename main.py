@@ -12,11 +12,16 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def main():
+    return render_template("main.html")
 
 
-@app.route('/', methods=['POST'])
+@app.route('/text2image')
+def texttoimage():
+    return render_template('text2image.html')
+
+
+@app.route('/text2image', methods=['POST'])
 def generate_image():
     if request.method == 'POST':
         option = get_selection_input()
@@ -33,7 +38,7 @@ def generate_image():
 
         # Error Handling
         if type(generated_image) == str:
-            return render_template('index.html', generated_image_base64="", text_input=generated_image)
+            return render_template('text2image.html', generated_image_base64="", text_input=generated_image)
         else:
             generated_image_ = []
             for i in range(0, len(generated_image)):
@@ -42,7 +47,7 @@ def generate_image():
                     (1024, 1024), resample=Image.LANCZOS)))
 
             if len(generated_image_) > 3:
-                return render_template('index.html',
+                return render_template('text2image.html',
                                        base64_encoded_image_1=generated_image_[
                                            0],
                                        base64_encoded_image_2=generated_image_[
@@ -53,7 +58,7 @@ def generate_image():
                                            3],
                                        text_input=text_input)
             elif len(generated_image) == 3:
-                return render_template('index.html',
+                return render_template('text2image.html',
                                        base64_encoded_image_1=generated_image_[
                                            0],
                                        base64_encoded_image_2=generated_image_[
@@ -63,14 +68,14 @@ def generate_image():
                                        text_input=text_input)
 
             elif len(generated_image) == 2:
-                return render_template('index.html',
+                return render_template('text2image.html',
                                        base64_encoded_image_1=generated_image_[
                                            0],
                                        base64_encoded_image_2=generated_image_[
                                            1],
                                        text_input=text_input)
             else:
-                return render_template('index.html',
+                return render_template('text2image.html',
                                        base64_encoded_image_1=generated_image_[
                                            0],
                                        text_input=text_input)
