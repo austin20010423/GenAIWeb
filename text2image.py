@@ -78,9 +78,7 @@ def model(text: str, negative: str = None):
                 Please try again"""
 
 
-"""
 if __name__ == '__main__':
 
     result = model("a cute cartoon dog on a grass, front")
     print(len(result))
-"""
