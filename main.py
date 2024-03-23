@@ -21,7 +21,7 @@ def texttoimage():
     return render_template('text2image.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/text2image', methods=['POST'])
 def generate_image():
     if request.method == 'POST':
         option = get_selection_input()
