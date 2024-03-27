@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="static/css/chat.css" />
+    <title>SquareSyncAI</title>
+  </head>
+  <body>
+    <div class="title">
+      <h1>SquareSyncAI</h1>
+    </div>
+    <div class="content">
+      <div id="chat-container">
+        <div id="messages">
+          <div class="message-group">
+            <div class="message bot-message">
+              嗨～ 我是你的SquareSyncAI小助手，今天可以幫你什麼呢？
+            </div>
+          </div>
+        </div>
+        <div id="options-group" class="message-group" style="display: none">
+          <div class="option-buttons">
+            <button onclick="selectOption('聊動物')">聊動物</button>
+            <button onclick="selectOption('聊保健')">聊保健</button>
+          </div>
+        </div>
+        <div id="input-container">
+          <input type="text" id="user-input" placeholder="輸入提問..." />
+          <button id="send-button">
+            <i class="material-icons">arrow_upward</i>
+          </button>
+        </div>
+      </div>
+      <div class="talk">
+        <div class="video">
+          <img id="response-image" src="static/pic/talk.jpg" width="400px" />
+          <audio autoplay>
+            <source src="static/pic/speak/chat.wav" type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+    </div>
+    <script>
+      const messagesContainer = document.getElementById("messages");
+      const userInput = document.getElementById("user-input");
+      const sendButton = document.getElementById("send-button");
+      const responseImage = document.getElementById("response-image");
+      let audioPlayer = new Audio();
+
+      window.onload = function () {
+        const optionsGroup = document.getElementById("options-group");
+        optionsGroup.style.display = "block";
+      };
+
+      function sendMessage(message) {
+        appendMessage(message, "user");
+        fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: message }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            appendMessage(data.message, "bot");
+            if (data) {
+              // 切换到 GIF 图片时播放音频
+              responseImage.src = "static/pic/talk.gif";
+              playAudio("static/pic/speak/chat.wav");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      function appendMessage(message, sender) {
+        const messageGroup = document.createElement("div");
+        messageGroup.classList.add("message-group");
+
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        messageElement.classList.add("message");
+        messageElement.classList.add(`${sender}-message`);
+        messageGroup.appendChild(messageElement);
+
+        messagesContainer.appendChild(messageGroup);
+
+        const maxWidth = messagesContainer.offsetWidth * 0.7;
+        messageElement.style.maxWidth = `${maxWidth}px`;
+
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      sendButton.addEventListener("click", function () {
+        const messageText = userInput.value.trim();
+        if (messageText !== "") {
+          sendMessage(messageText);
+          userInput.value = "";
+        }
+      });
+
+      userInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          const messageText = userInput.value.trim();
+          if (messageText !== "") {
+            sendMessage(messageText);
+            userInput.value = "";
+          }
+        }
+      });
+
+      function playAudio(audioSrc) {
+        audioPlayer.src = audioSrc;
+        audioPlayer.play();
+        audioPlayer.addEventListener("ended", function () {
+          responseImage.src = "static/pic/talk.jpg";
+          audioPlayer.removeEventListener("ended", this);
+        });
+      }
+
+      function selectOption(option) {
+        console.log("Option selected:", option);
+        sendMessage(option);
+        const optionsGroup = document.getElementById("options-group");
+        optionsGroup.style.display = "none";
+      }
+    </script>
+  </body>
+</html>

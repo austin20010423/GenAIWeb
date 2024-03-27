@@ -4,3 +4,5 @@ numpy==1.24.3
 Flask==2.2.2
 googletrans==4.0.0rc1
 Werkzeug==2.2.2
+google-cloud-dialogflow-cx==1.32.1
+google-cloud-texttospeech==2.16.3

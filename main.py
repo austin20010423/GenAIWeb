@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from io import BytesIO
 import base64
 import text2image
+from p_square_chat import chat
 from PIL import Image
 import os
 from googletrans import Translator
@@ -148,6 +149,21 @@ def pil_to_base64(pil_image):
     buffered = BytesIO()
     pil_image.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
+
+
+@app.route('/SquareSyncAI')
+def squaresyncai():
+    return render_template('chat.html')
+
+
+@app.route('/api/chat', methods=['POST'])
+def chat_response():
+    data = request.json
+    user_message = data.get('message')
+
+    bot_response = chat(user_message)
+
+    return jsonify({'message': bot_response})
 
 
 if __name__ == '__main__':

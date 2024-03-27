@@ -38,10 +38,12 @@
           </div>
           <nav class="nav-column">
             <ul class="nav-list">
-              <button class="nav-item" onclick="redirectToAnotherPath()">
+              <button class="nav-item" onclick="redirectTotext2image()">
                 Text to Image
               </button>
-              <button class="nav-item">SquareSyncAI</button>
+              <button class="nav-item" onclick="redirectTosquaresyncai()">
+                SquareSyncAI
+              </button>
               <button class="nav-item">Text to video</button>
             </ul>
           </nav>
@@ -122,9 +124,14 @@
       section.scrollIntoView({ behavior: "smooth" });
     }
 
-    function redirectToAnotherPath() {
+    function redirectTotext2image() {
       // Redirect to /text2image
       window.location.href = "/text2image";
+    }
+
+    function redirectTosquaresyncai() {
+      // Redirect to /text2image
+      window.location.href = "/SquareSyncAI";
     }
   </script>
 </html>
