@@ -1,6 +1,7 @@
 from vertexai.preview.generative_models import GenerativeModel
 from detect_intent import run_dialogflow
 from google.cloud import texttospeech
+import shutil
 
 
 def run_chat_gemini(message: str):
@@ -17,12 +18,12 @@ def chat(message: str):
 
     if response == "對不起，我聽不懂你的問題。":
         response = run_chat_gemini(message)
-    synthesize_text(response)
+    audio_data = synthesize_text(response)
 
     return response
 
 
-def synthesize_text(text, output_file="static/pic/speak/chat.wav"):
+def synthesize_text(text, output_file="/tmp/chat.wav"):
     # Create a TextToSpeechClient
     client = texttospeech.TextToSpeechClient()
 
@@ -49,8 +50,10 @@ def synthesize_text(text, output_file="static/pic/speak/chat.wav"):
         input=synthesis_input, voice=voice, audio_config=audio_config
     )
 
-    # Save the synthesized audio to a file
+    return response
+
+    """# Save the synthesized audio to a file
     with open(output_file, "wb") as out:
         out.write(response.audio_content)
         print("=" * 20)
-        print(f'Audio content written to file "{output_file}"')
+        print(f'Audio content written to file "{output_file}"')"""

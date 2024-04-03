@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 from io import BytesIO
 import base64
 import text2image
-from p_square_chat import chat
+from p_square_chat import chat, synthesize_text
 from PIL import Image
 import os
+import io
 from googletrans import Translator
 
 
@@ -157,13 +158,30 @@ def squaresyncai():
 
 
 @app.route('/api/chat', methods=['POST'])
-def chat_response():
+def chat_with_audio_response():
     data = request.json
     user_message = data.get('message')
-
+    print("chat user message", user_message)
     bot_response = chat(user_message)
 
-    return jsonify({'message': bot_response})
+    try:
+        audio_response = synthesize_text(bot_response)
+        audio_file = generate_audio_file(audio_response)
+        audio_file_base64 = base64.b64encode(audio_file).decode('utf-8')
+    except Exception as e:
+        print("Error:", e)
+        audio_file_base64 = None
+
+    return jsonify({'message': bot_response, 'audio_file': audio_file_base64})
+
+
+def generate_audio_file(audio_response):
+    if audio_response is not None:
+        with io.BytesIO() as f:
+            f.write(audio_response.audio_content)
+            f.seek(0)
+            return f.read()
+    return None
 
 
 if __name__ == '__main__':
