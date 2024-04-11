@@ -1,0 +1,77 @@
+body {
+  background-color: #a9a9a9; /* Dark gray background */
+  font-family: Arial, sans-serif; /* Use a common font for better readability */
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+}
+
+.title {
+  font-size: 64px;
+  text-align: center; /* Center align the title */
+  color: #fff; /* White text color */
+  background-color: #333; /* Dark background for the title */
+  padding: 20px 0; /* Add padding for better spacing */
+  margin: 0; /* Remove default margin */
+}
+
+.input-form {
+  max-width: 700px; /* Limit the width of the form */
+  max-height: 600px;
+  margin: 20px auto; /* Center the form horizontally */
+  padding: 20px; /* Add padding to the form */
+  background-color: #fff; /* White background for the form */
+  border-radius: 8px; /* Add rounded corners to the form */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+label{
+  font-size: 35px;
+}
+.image-label, .text-label {
+  display: block; /* Display labels as blocks for better spacing */
+  margin-bottom: 10px; /* Add spacing between labels and inputs */
+}
+
+.text-input {
+  width: 100%; /* Make the text input full width */
+  height: 100px; /* Set a fixed height for the text input */
+  resize: none; /* Disable resizing of the text input */
+  font-size: 18px;
+}
+
+.generate-button {
+  
+  width: 20%; /* Make the button full width */
+  padding: 10px; /* Add padding to the button */
+  background-color: #333; /* Dark background for the button */
+  color: #fff; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Add rounded corners */
+  cursor: pointer; /* Add pointer cursor on hover */
+}
+
+.video-section {
+  max-width: 640px; /* Limit the width of the video section */
+  margin: 20px auto; /* Center the video section horizontally */
+  padding: 20px; /* Add padding to the video section */
+  background-color: #fff; /* White background for the video section */
+  border-radius: 8px; /* Add rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+video {
+  width: 100%; /* Make the video fill its container */
+  border-radius: 4px; /* Add rounded corners to the video */
+}
+
+button {
+  padding: 10px 20px; /* Add padding to the button */
+  background-color: #333; /* Dark background for the button */
+  color: #fff; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Add rounded corners */
+  cursor: pointer; /* Add pointer cursor on hover */
+}
+
+button:hover {
+  background-color: #555; /* Darken the button on hover */
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>text2video</title>
+    <meta name="description" content="text2video" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./static/css/text2video.css" />
+  </head>
+  <body>
+    
+      <h1 class="title">Text to Video</h1>
+      <div class="input-form">
+          <form
+          class="image-upload"
+          action="/getVideo"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <label for="imageInput" class="image-label">選擇圖片</label>
+          <input
+            type="file"
+            id="imageInput"
+            name="file"
+            class="visually-hidden"
+          />
+
+          <label for="textInput" class="text-label">輸入圖片想說的話</label>
+          <textarea
+            id="textInput"
+            name="text"
+            class="text-input"
+            placeholder="輸入文字..."
+            aria-label="輸入圖片想說的話"
+          ></textarea>
+
+          <button type="submit" class="generate-button" id="generate-button">生成影片</button>
+        </form>
+        </div>
+        
+        <div class="video-section">
+          <video width="640" height="360" controls>
+            <source src="data:video/mp4;base64,{{ mp4_data }}" type="video/mp4" />
+            Your browser does not support the video tag.
+            
+          </video>
+          <a href="data:image/png;base64,{{ mp4_data }}" download="talk.mp4">
+            <button>下載影片</button>
+        </div>
+      </div>
+      <script>
+        
+      </script>
+  </body>
+</html>

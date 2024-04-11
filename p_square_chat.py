@@ -40,7 +40,7 @@ def synthesize_text(text, output_file="/tmp/chat.wav"):
 
     # Set the audio output configuration
     audio_config = texttospeech.AudioConfig(
-        pitch=2,
+        pitch=0,
         speaking_rate=1,
         audio_encoding=texttospeech.AudioEncoding.LINEAR16
     )
@@ -51,9 +51,3 @@ def synthesize_text(text, output_file="/tmp/chat.wav"):
     )
 
     return response
-
-    """# Save the synthesized audio to a file
-    with open(output_file, "wb") as out:
-        out.write(response.audio_content)
-        print("=" * 20)
-        print(f'Audio content written to file "{output_file}"')"""

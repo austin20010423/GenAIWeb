@@ -1,13 +1,16 @@
 from flask import Flask, render_template, request, jsonify, send_file
+import requests
 from io import BytesIO
 import base64
 import text2image
 from p_square_chat import chat, synthesize_text
 from PIL import Image
+import warnings
 import os
 import io
 from googletrans import Translator
 
+warnings.filterwarnings("ignore", category=UserWarning)
 
 ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
@@ -176,12 +179,34 @@ def chat_with_audio_response():
 
 
 def generate_audio_file(audio_response):
+
     if audio_response is not None:
         with io.BytesIO() as f:
             f.write(audio_response.audio_content)
             f.seek(0)
             return f.read()
     return None
+
+
+@app.route('/text2video')
+def text2video():
+    return render_template("text2video.html")
+
+
+@app.route('/getVideo', methods=["POST"])
+def get_video():
+    if request.method == "POST":
+        pil_image = io.BytesIO(request.files["file"].read())
+        text = request.form["text"]
+
+    # call converter API
+    url = "http://34.83.72.241:8000/sadtalker"
+    data = {'text': text}
+    files = {'image': pil_image}
+    response = requests.post(url, data=data, files=files)
+    mp4_data = response.content
+    print(type(response.content))
+    return render_template('text2video.html', mp4_data=base64.b64encode(mp4_data).decode())
 
 
 if __name__ == '__main__':

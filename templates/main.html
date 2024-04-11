@@ -44,7 +44,9 @@
               <button class="nav-item" onclick="redirectTosquaresyncai()">
                 SquareSyncAI
               </button>
-              <button class="nav-item">Text to video</button>
+              <button class="nav-item" onclick="redirectTotext2video()">
+                Text to video
+              </button>
             </ul>
           </nav>
         </div>
@@ -130,8 +132,13 @@
     }
 
     function redirectTosquaresyncai() {
-      // Redirect to /text2image
+      // Redirect to /SquareSyncAI
       window.location.href = "/SquareSyncAI";
+    }
+
+    function redirectTotext2video() {
+      // Redirect to /text2video
+      window.location.href = "/text2video";
     }
   </script>
 </html>
