@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import requests
 from io import BytesIO
 import base64
 import text2image
 from p_square_chat import chat, synthesize_text
+from sadtalker import sadtalker
 from PIL import Image
 import warnings
 import os
@@ -200,14 +201,17 @@ def get_video():
         text = request.form["text"]
 
     # call converter API
-    url = "http://34.83.72.241:8000/sadtalker"
-    data = {'text': text}
-    files = {'image': pil_image}
-    response = requests.post(url, data=data, files=files)
-    mp4_data = response.content
-    print(type(response.content))
-    return render_template('text2video.html', mp4_data=base64.b64encode(mp4_data).decode())
+    status = sadtalker(text, pil_image)
+    print(status)
+    
+    # List all files in the VIDEO_DIR
+    files = os.listdir("outputs")
+    
+    # Ensure there's only one file
+    if len(files) == 1:
+        filename = files[0]
 
+    return send_from_directory("outputs", filename)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    app.run(host="0.0.0.0", port=8000, debug=True)
