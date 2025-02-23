@@ -5,11 +5,11 @@ from google.cloud.dialogflowcx_v3beta1.types import session
 
 
 def run_dialogflow(question: str):
-    project_id = "sunlit-inn-386509"
+    project_id = "projectID"
     # For more information about regionalization see https://cloud.google.com/dialogflow/cx/docs/how/region
     location_id = "global"
     # For more info on agents see https://cloud.google.com/dialogflow/cx/docs/concept/agent
-    agent_id = "ba7d1c97-bcbd-4372-800b-809c8ba2585a"
+    agent_id = "agentID"
     agent = f"projects/{project_id}/locations/{location_id}/agents/{agent_id}"
     # For more information on sessions see https://cloud.google.com/dialogflow/cx/docs/concept/session
     session_id = uuid.uuid4()
